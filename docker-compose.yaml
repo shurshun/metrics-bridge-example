@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    command: --smallfiles
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: test
+      MONGO_INITDB_ROOT_PASSWORD: test
+    volumes:
+      - mongo-data:/data/db
+
+  beanstalkd:
+    image: shurshun/beanstalkd
+    tmpfs: /var/lib/beanstalkd
+    ports:
+      - 11300:11300
+
+volumes:
+  mongo-data:
